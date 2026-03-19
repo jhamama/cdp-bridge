@@ -1,0 +1,84 @@
+{
+  "name": "cdp-bridge",
+  "displayName": "Chrome DevTools Bridge",
+  "publisher": "cdp-bridge",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "activationEvents": ["onStartupFinished"],
+  "icon": "icon.png",
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cdpBridge.start",
+        "title": "Chrome DevTools Bridge: Start HTTP Server & Connect to Chrome",
+        "category": "Chrome DevTools Bridge"
+      },
+      {
+        "command": "cdpBridge.stop",
+        "title": "Chrome DevTools Bridge: Stop HTTP Server & Disconnect",
+        "category": "Chrome DevTools Bridge"
+      },
+      {
+        "command": "cdpBridge.status",
+        "title": "Chrome DevTools Bridge: Show Status (CDP state, active tab, port)",
+        "category": "Chrome DevTools Bridge"
+      },
+      {
+        "command": "cdpBridge.reconnect",
+        "title": "Chrome DevTools Bridge: Reconnect to Chrome (keep server running)",
+        "category": "Chrome DevTools Bridge"
+      }
+    ],
+    "configuration": {
+      "title": "CDP Bridge",
+      "properties": {
+        "cdpBridge.chromePort": {
+          "type": "number",
+          "default": 9222,
+          "description": "Chrome remote debugging port"
+        },
+        "cdpBridge.serverPort": {
+          "type": "number",
+          "default": 9333,
+          "description": "Local HTTP server port"
+        },
+        "cdpBridge.networkLogSize": {
+          "type": "number",
+          "default": 200,
+          "description": "Maximum number of network entries to keep"
+        },
+        "cdpBridge.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically start CDP Bridge when VSCode opens"
+        },
+        "cdpBridge.reconnectInterval": {
+          "type": "number",
+          "default": 3000,
+          "description": "Interval in milliseconds between reconnect attempts"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "dependencies": {
+    "chrome-remote-interface": "^0.33.0",
+    "express": "^4.18.0",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/express": "^4.17.0",
+    "@types/cors": "^2.8.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.0.0"
+  }
+}
