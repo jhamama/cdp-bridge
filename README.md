@@ -155,9 +155,11 @@ Endpoints:
 All responses use the format: { ok: true, data: ... } or { ok: false, error: "..." }
 
 Tips:
-- Take a screenshot after navigating to confirm the page loaded correctly
-- Use /eval to query DOM state instead of parsing /dom HTML when possible
-- Use /network with ?filter= to find specific API calls
+- Prefer /eval to verify page state (e.g. document.title, element existence, text content)
+- Use /network with ?filter= to confirm API calls completed successfully
+- Use /console to check for errors after actions
+- Use /dom when you need to inspect page structure
+- Use /screenshot only as a last resort when other endpoints can't answer your question
 - JS exceptions from /eval are returned as data, not HTTP errors
 ```
 
